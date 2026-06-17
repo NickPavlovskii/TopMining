@@ -1,0 +1,58 @@
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* h1,
+h2,
+h3,
+p,
+span,
+nav,
+li {
+  color: #141414;
+} */
+
+h1,
+h2 {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+:root {
+  --app-font: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+html,
+body {
+  font-family: var(--app-font);
+}
+
+@media (max-width: 560px) {
+  body {
+    background-color: #ffffff;
+  }
+
+  body.is-mobile-menu-open {
+    overflow: hidden;
+  }
+}

@@ -1,0 +1,6 @@
+@import './variables.css';
+@import '@fontsource/unbounded/600.css';
+@import './global.css';
+@import './scrollbar.scss';
+@import '@nuxt/ui';
+@import 'tailwindcss';
