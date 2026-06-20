@@ -3,7 +3,7 @@
     <!-- <work-process-section @cta="onLeaveRequest" /> -->
     <top-mining-section />
     <crypto-market-section />
-    <site-footer />
+    <top-mining-footer />
   </main>
 </template>
 
