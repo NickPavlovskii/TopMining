@@ -187,8 +187,8 @@
   .crypto-section {
     min-height: 100vh;
     padding: 88px 48px 96px;
-    background: #1e1e1e;
-    color: #ffffff;
+    background: var(--tm-dark-bg);
+    color: var(--tm-white);
     font-family:
       'Segoe UI',
       system-ui,
@@ -220,7 +220,7 @@
   }
 
   .crypto-section__title-fill {
-    color: #ffffff;
+    color: var(--tm-white);
   }
 
   .crypto-section__title-outline {
@@ -238,7 +238,7 @@
 
   .crypto-section__chart-block-title {
     margin: 0 0 18px;
-    color: #ffffff;
+    color: var(--tm-white);
     font-size: 30px;
     font-weight: 800;
     letter-spacing: -0.02em;
@@ -250,7 +250,7 @@
     min-height: 300px;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 24px;
-    background: #2a2a2a;
+    background: var(--tm-card-bg);
     overflow: hidden;
   }
 
@@ -317,8 +317,8 @@
       margin-top: -34px;
       padding: 72px 14px 56px;
       border-radius: 42px 42px 0 0;
-      background: #f4f4f4;
-      color: #151515;
+      background: var(--tm-surface-gray);
+      color: var(--tm-black);
       overflow: hidden;
     }
 
@@ -333,17 +333,25 @@
     }
 
     .crypto-section__hero h1 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
       font-size: clamp(30px, 10.5vw, 40px);
-      line-height: 0.9;
+      line-height: 1.05;
       letter-spacing: -0.055em;
     }
 
+    .crypto-section__hero h1 span {
+      display: block;
+    }
+
     .crypto-section__title-fill {
-      color: #151515;
+      color: var(--tm-black);
     }
 
     .crypto-section__title-outline {
-      color: #ff6418;
+      color: var(--tm-orange);
       -webkit-text-stroke: 0;
     }
 
@@ -355,17 +363,17 @@
     }
 
     .crypto-section__chart-block-title {
-      color: #151515;
+      color: var(--tm-black);
       font-size: 22px;
       margin-bottom: 12px;
     }
 
     .crypto-section__chart {
       min-height: 220px;
-      border: 1px solid #d8d8d8;
+      border: 1px solid var(--tm-border);
       border-radius: 22px;
-      background: #151515;
-      color: #ffffff;
+      background: var(--tm-black);
+      color: var(--tm-white);
     }
 
     .crypto-section__chart-meta {

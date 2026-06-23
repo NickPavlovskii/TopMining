@@ -3,7 +3,8 @@
     <!-- <work-process-section @cta="onLeaveRequest" /> -->
     <top-mining-section />
     <crypto-market-section />
-    <top-mining-footer />
+    
+    <mining-calculator-promo />
   </main>
 </template>
 

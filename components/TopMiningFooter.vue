@@ -1,7 +1,11 @@
 <template>
-  <footer class="site-footer">
-    <section class="site-footer__mobile-contact" aria-labelledby="footer-contact-title">
-      <h2 id="footer-contact-title">
+  <footer :class="['site-footer', { 'site-footer--privacy': isPrivacyPage }]">
+    <section
+      v-if="!isPrivacyPage"
+      class="site-footer__contact"
+      aria-labelledby="footer-contact-title"
+    >
+      <h2 id="footer-contact-title" class="site-footer__contact-heading">
         Есть вопросы?
         <span>Предложения?</span>
       </h2>
@@ -22,7 +26,23 @@
           <textarea placeholder="Ваш вопрос / предложение" />
         </label>
 
-        <button type="submit" class="site-footer__contact-submit">
+        <label class="site-footer__contact-consent">
+          <input
+            v-model="isPersonalDataAccepted"
+            type="checkbox"
+            required
+          />
+          <span>
+            Даю согласие на
+            <NuxtLink to="/privacy">обработку персональных данных</NuxtLink>
+          </span>
+        </label>
+
+        <button
+          type="submit"
+          class="site-footer__contact-submit"
+          :disabled="!isPersonalDataAccepted"
+        >
           Отправить
           <Icon name="mdi:arrow-top-right" />
         </button>
@@ -38,14 +58,7 @@
 
     <div class="site-footer__inner">
       <h2 class="site-footer__brand" aria-label="Топ - Майнинг">
-        <span class="site-footer__brand-text">
-          <img
-            class="site-footer__brand-logo"
-            :src="logoMark"
-            alt=""
-          />
-          ТОП - МАЙНИНГ
-        </span>
+        <top-mining-brand-title variant="footer" spaced />
       </h2>
 
       <div class="site-footer__content">
@@ -65,9 +78,9 @@
             />
           </form>
 
-          <a href="#" class="site-footer__privacy">
+          <NuxtLink to="/privacy" class="site-footer__privacy">
             Политика конфиденциальности
-          </a>
+          </NuxtLink>
         </section>
 
         <nav class="site-footer__nav" aria-label="Навигация футера">
@@ -101,7 +114,10 @@
 </template>
 
 <script setup lang="ts">
-  import logoMark from '~/assets/images/top-mining/logo-mark.png'
+  const route = useRoute()
+  const isPersonalDataAccepted = ref(false)
+
+  const isPrivacyPage = computed(() => route.path === '/privacy')
 
   function scrollToTop() {
     if (import.meta.server) {
@@ -117,10 +133,10 @@
     position: relative;
     z-index: 2;
     margin-top: -42px;
-    padding: 54px 46px 56px;
-    border-radius: 48px 48px 0 0;
-    background: #ffffff;
-    color: #151515;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--tm-black);
     font-family:
       'Segoe UI',
       system-ui,
@@ -129,14 +145,218 @@
     overflow: hidden;
   }
 
-  .site-footer__inner {
-    position: relative;
-    max-width: 1440px;
-    margin: 0 auto;
+  .site-footer--privacy {
+    margin-top: 0;
   }
 
-  .site-footer__mobile-contact {
+  .site-footer--privacy .site-footer__inner {
+    border-radius: 0;
+  }
+
+  .site-footer--privacy .site-footer__inner::before {
     display: none;
+  }
+
+  .site-footer__contact {
+    padding: 0 46px 64px;
+    border-radius: 60px 60px 0 0;
+    background: var(--tm-black);
+    color: var(--tm-white);
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .site-footer__contact-heading {
+    margin: 144px 0 56px;
+    color: var(--tm-off-white);
+    font-family: 'Unbounded', 'Segoe UI', system-ui, sans-serif;
+    font-size: 120px;
+    font-weight: 500;
+    line-height: 120px;
+    text-transform: uppercase;
+  }
+
+  .site-footer__contact-heading span {
+    display: block;
+  }
+
+  .site-footer__contact-form {
+    display: grid;
+    gap: 22px;
+    max-width: 520px;
+    margin: 0 auto 64px;
+  }
+
+  .site-footer__contact-form label:not(.site-footer__contact-consent) {
+    display: grid;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .site-footer__contact-form label:not(.site-footer__contact-consent) span {
+    color: var(--tm-white);
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .site-footer__contact-consent {
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .site-footer__contact-consent input {
+    flex: 0 0 auto;
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 4px;
+    background: transparent;
+    accent-color: var(--tm-orange);
+    cursor: pointer;
+  }
+
+  .site-footer__contact-consent span {
+    flex: 1 1 auto;
+    min-width: 0;
+    color: var(--tm-white);
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1.25;
+    text-align: left;
+    text-transform: uppercase;
+  }
+
+  .site-footer__contact-consent a {
+    color: var(--tm-white);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .site-footer__contact-consent a:hover,
+  .site-footer__contact-consent a:focus-visible {
+    color: var(--tm-orange);
+  }
+
+  .site-footer__contact-form input:not([type='checkbox']),
+  .site-footer__contact-form textarea {
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--tm-white);
+    font: inherit;
+    outline: none;
+  }
+
+  .site-footer__contact-form input:not([type='checkbox']) {
+    height: 48px;
+    padding: 0 18px;
+    font-size: 14px;
+  }
+
+  .site-footer__contact-form textarea {
+    min-height: 120px;
+    padding: 14px 18px;
+    border-radius: 14px;
+    font-size: 14px;
+    resize: vertical;
+  }
+
+  .site-footer__contact-form input:not([type='checkbox'])::placeholder,
+  .site-footer__contact-form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .site-footer__contact-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    height: 48px;
+    padding: 0 18px;
+    border: 1px solid var(--tm-orange);
+    border-radius: 999px;
+    background: var(--tm-orange);
+    color: var(--tm-white);
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+
+  .site-footer__contact-submit:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  .site-footer__contact-submit svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .site-footer__contact-benefits {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+  }
+
+  .site-footer__contact-benefits li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 88px;
+    padding: 0 24px;
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--tm-white);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.25;
+    text-align: center;
+  }
+
+  .site-footer__contact-benefits li:first-child {
+    border-left: 0;
+  }
+
+  @media (max-width: 1919px) {
+    .site-footer__contact-heading {
+      font-size: 96px;
+      line-height: 103.68px;
+    }
+  }
+
+  .site-footer__inner {
+    position: relative;
+    padding: 54px 46px 56px;
+    border-radius: 48px 48px 0 0;
+    background: var(--tm-white);
+  }
+
+  .site-footer__inner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    left: 50%;
+    z-index: -1;
+    width: 100vw;
+    border-radius: inherit;
+    background: var(--tm-white);
+    transform: translateX(-50%);
   }
 
   .site-footer__brand {
@@ -164,20 +384,6 @@
     filter: blur(7px);
     transform: translateX(-50%) scaleY(0.72);
     pointer-events: none;
-  }
-
-  .site-footer__brand-text {
-    position: relative;
-    display: inline-block;
-  }
-
-  .site-footer__brand-logo {
-    position: absolute;
-    left: 1.04em;
-    top: 0.24em;
-    width: 0.28em;
-    height: 0.28em;
-    object-fit: contain;
   }
 
   .site-footer__content {
@@ -211,16 +417,16 @@
     width: 100%;
     height: 38px;
     padding: 0 18px;
-    border: 1px solid #cfcfcf;
+    border: 1px solid var(--tm-border-light);
     border-radius: 999px;
-    background: #ffffff;
-    color: #151515;
+    background: var(--tm-white);
+    color: var(--tm-black);
     font: inherit;
     outline: none;
   }
 
   .site-footer__input-wrap input::placeholder {
-    color: #8c8c8c;
+    color: var(--tm-text-placeholder);
   }
 
   .site-footer__scroll-wrap {
@@ -234,7 +440,7 @@
   }
 
   .site-footer__privacy {
-    color: #151515;
+    color: var(--tm-black);
     font-size: 13px;
     text-decoration: none;
     text-transform: uppercase;
@@ -252,7 +458,7 @@
     gap: 8px;
     min-height: 128px;
     padding-left: 28px;
-    border-left: 1px solid #d8d8d8;
+    border-left: 1px solid var(--tm-border);
   }
 
   .site-footer__nav-column a,
@@ -260,7 +466,7 @@
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    color: #151515;
+    color: var(--tm-black);
     font-size: 13px;
     font-weight: 500;
     line-height: 1;
@@ -270,7 +476,7 @@
 
   .site-footer__nav-column a:hover,
   .site-footer__nav-column a:focus-visible {
-    color: #ff6418;
+    color: var(--tm-orange);
   }
 
   .site-footer__nav-column svg {
@@ -284,7 +490,12 @@
   }
 
   @media (max-width: 1200px) {
-    .site-footer {
+    .site-footer__contact {
+      padding-right: 38px;
+      padding-left: 38px;
+    }
+
+    .site-footer__inner {
       padding-right: 38px;
       padding-left: 38px;
     }
@@ -315,6 +526,29 @@
   @media (max-width: 900px) {
     .site-footer {
       margin-top: -30px;
+    }
+
+    .site-footer__contact {
+      padding: 0 26px 48px;
+      border-radius: 40px 40px 0 0;
+    }
+
+    .site-footer__contact-heading {
+      margin-top: 96px;
+      margin-bottom: 40px;
+    }
+
+    .site-footer__contact-form {
+      margin-bottom: 48px;
+    }
+
+    .site-footer__contact-benefits li {
+      min-height: 72px;
+      padding: 0 14px;
+      font-size: 11px;
+    }
+
+    .site-footer__inner {
       padding: 42px 26px 46px;
       border-radius: 34px 34px 0 0;
     }
@@ -361,29 +595,22 @@
       overflow: visible;
     }
 
-    .site-footer__mobile-contact {
-      display: block;
+    .site-footer__contact {
       padding: 50px 30px 42px;
-      border-radius: 28px;
-      background:
-        radial-gradient(circle at 50% 24%, rgba(255, 255, 255, 0.06), transparent 32%),
-        #151515;
-      color: #ffffff;
-      text-align: center;
+      border-radius: 28px 28px 0 0;
+      background: var(--tm-black);
     }
 
-    .site-footer__mobile-contact h2 {
+    .site-footer__contact-heading {
       margin: 0 0 24px;
-      color: #ffffff;
+      color: var(--tm-white);
       font-size: 34px;
       font-weight: 900;
       line-height: 0.95;
       letter-spacing: -0.05em;
-      text-transform: uppercase;
     }
 
-    .site-footer__mobile-contact h2 span {
-      display: block;
+    .site-footer__contact-heading span {
       margin-top: 4px;
       font-size: 22px;
       letter-spacing: -0.03em;
@@ -392,36 +619,54 @@
     .site-footer__contact-form {
       display: grid;
       gap: 14px;
-      max-width: 230px;
+      max-width: 290px;
       margin: 0 auto 26px;
     }
 
-    .site-footer__contact-form label {
+    .site-footer__contact-form label:not(.site-footer__contact-consent) {
       display: grid;
       gap: 7px;
       text-align: center;
     }
 
-    .site-footer__contact-form label span {
-      color: #ffffff;
+    .site-footer__contact-form label:not(.site-footer__contact-consent) span {
+      color: var(--tm-white);
       font-size: 12px;
       font-weight: 800;
       line-height: 1;
       text-transform: uppercase;
     }
 
-    .site-footer__contact-form input,
+    .site-footer__contact-consent {
+      display: flex !important;
+      flex-direction: row;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .site-footer__contact-consent input {
+      width: 12px;
+      height: 12px;
+      margin: 0;
+    }
+
+    .site-footer__contact-consent span {
+      font-size: 7px;
+      line-height: 1.2;
+    }
+
+    .site-footer__contact-form input:not([type='checkbox']),
     .site-footer__contact-form textarea {
       width: 100%;
       border: 1px solid rgba(255, 255, 255, 0.45);
       border-radius: 999px;
       background: transparent;
-      color: #ffffff;
+      color: var(--tm-white);
       font: inherit;
       outline: none;
     }
 
-    .site-footer__contact-form input {
+    .site-footer__contact-form input:not([type='checkbox']) {
       height: 24px;
       padding: 0 10px;
       font-size: 8px;
@@ -435,7 +680,7 @@
       resize: vertical;
     }
 
-    .site-footer__contact-form input::placeholder,
+    .site-footer__contact-form input:not([type='checkbox'])::placeholder,
     .site-footer__contact-form textarea::placeholder {
       color: rgba(255, 255, 255, 0.45);
     }
@@ -448,14 +693,18 @@
       width: 100%;
       height: 24px;
       padding: 0 12px;
-      border: 1px solid #ff6418;
+      border: 1px solid var(--tm-orange);
       border-radius: 999px;
-      background: #ff6418;
-      color: #ffffff;
+      background: var(--tm-orange);
+      color: var(--tm-white);
       font-size: 8px;
       font-weight: 800;
       line-height: 1;
       text-transform: uppercase;
+    }
+
+    .site-footer__contact-submit:disabled {
+      opacity: 0.45;
     }
 
     .site-footer__contact-submit svg {
@@ -479,7 +728,7 @@
       min-height: 40px;
       padding: 0 8px;
       border-left: 1px solid rgba(255, 255, 255, 0.12);
-      color: #ffffff;
+      color: var(--tm-white);
       font-size: 9px;
       font-weight: 600;
       line-height: 1.15;
@@ -493,7 +742,7 @@
     .site-footer__inner {
       padding: 34px 18px 40px;
       border-radius: 28px 28px 0 0;
-      background: #ffffff;
+      background: var(--tm-white);
       overflow: hidden;
     }
 
@@ -520,17 +769,6 @@
       top: 0.44em;
       filter: blur(4px);
       max-width: 100%;
-    }
-
-    .site-footer__brand-text {
-      max-width: 100%;
-    }
-
-    .site-footer__brand-logo {
-      left: 1.03em;
-      top: 0.32em;
-      width: 0.26em;
-      height: 0.26em;
     }
 
     .site-footer__content,

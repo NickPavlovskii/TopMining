@@ -1,30 +1,36 @@
 export interface TopMiningNavColumn {
   title: string
+  slug: 'catalog' | 'ratings' | 'calculator' | 'articles' | 'consulting'
   icon: string
   mobileVisible: number
+  phoneMenuVisible?: number
+  mobileSingleColumn?: boolean
   items: string[]
 }
 
 export const TOP_MINING_NAV_COLUMNS: TopMiningNavColumn[] = [
   {
     title: 'Каталог организаций',
+    slug: 'catalog',
     icon: 'mdi:office-building-outline',
-    mobileVisible: 2,
+    mobileVisible: 7,
+    phoneMenuVisible: 2,
     items: [
-      'Майнинг-пулы',
-      'Сервисные центры',
-      'Продажа оборудования',
-      'Калькуляторы доходности',
       'Майнинг-отели',
-      'Криптокошельки',
+      'Продажа оборудования',
+      'Майнинг-пулы',
       'Криптобиржи',
+      'Сервисные центры',
+      'Криптокошельки',
       'Производители асиков',
     ],
   },
   {
     title: 'Рейтинги в майнинге',
+    slug: 'ratings',
     icon: 'mdi:trophy-outline',
-    mobileVisible: 2,
+    mobileVisible: 4,
+    phoneMenuVisible: 2,
     items: [
       'Техника и оборудование',
       'Продажи и услуги',
@@ -34,22 +40,106 @@ export const TOP_MINING_NAV_COLUMNS: TopMiningNavColumn[] = [
   },
   {
     title: 'Майнинг-калькулятор',
+    slug: 'calculator',
     icon: 'mdi:calculator-variant-outline',
-    mobileVisible: 4,
-    items: ['ASIC-майнеры', 'GPU', 'CPU', 'Калькулятор в Telegram'],
+    mobileVisible: 6,
+    items: [
+      'ASIC-майнеры',
+      'GPU',
+      'CPU',
+      'Калькулятор в Telegram',
+      'Конвертер хешрейта',
+      'Рейтинги',
+    ],
   },
   {
     title: 'Статьи',
+    slug: 'articles',
     icon: 'mdi:file-document-outline',
-    mobileVisible: 3,
+    mobileVisible: 5,
+    phoneMenuVisible: 3,
     items: [
-      'Новости',
       'Майнинг',
-      'Криптовалюты',
       'Инструменты и сервисы',
       'Инвестиции',
       'Новичкам',
       'Разное',
     ],
   },
+  {
+    title: 'Бизнес-consulting',
+    slug: 'consulting',
+    icon: 'mdi:currency-rub',
+    mobileVisible: 4,
+    mobileSingleColumn: true,
+    items: [
+      'Подбираем майнинг-отель',
+      'Помогаем купить ASIC выгодно',
+      'Увеличим ваш доход',
+      'Строительство дата-центров',
+    ],
+  },
 ]
+
+export function getMobileNavItemGroups(
+  items: readonly string[],
+  singleColumn = false,
+): string[][] {
+  if (singleColumn) {
+    return [items.slice()]
+  }
+
+  const groups: string[][] = []
+
+  for (let index = 0; index < items.length; index += 2) {
+    groups.push(items.slice(index, index + 2))
+  }
+
+  return groups
+}
+
+export function getMobileNavItemColumns(
+  items: readonly string[],
+  singleColumn = false,
+): string[][] {
+  if (singleColumn) {
+    return [items.slice()]
+  }
+
+  const leftColumn: string[] = []
+  const rightColumn: string[] = []
+
+  items.forEach((item, index) => {
+    if (index % 2 === 0) {
+      leftColumn.push(item)
+      return
+    }
+
+    rightColumn.push(item)
+  })
+
+  return [leftColumn, rightColumn]
+}
+
+export function getVisiblePhoneMenuItems(
+  items: readonly string[],
+  visibleCount: number | undefined,
+  expanded: boolean,
+): string[] {
+  if (
+    visibleCount === undefined
+    || expanded
+    || items.length <= visibleCount
+  ) {
+    return items.slice()
+  }
+
+  return items.slice(0, visibleCount)
+}
+
+export function hasPhoneMenuMoreItems(
+  items: readonly string[],
+  visibleCount: number | undefined,
+): boolean {
+  return visibleCount !== undefined && items.length > visibleCount
+}

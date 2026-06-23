@@ -31,7 +31,7 @@
         class="process-section__button"
         title="Оставить заявку"
         append-icon=""
-        bg-color="#ffffff"
+        bg-color="var(--tm-white)"
         color="#0752bd"
         :border="false"
         width="122px"
@@ -66,7 +66,7 @@
 <style scoped>
   .process-section {
     width: 100%;
-    background: #ffffff;
+    background: var(--tm-white);
     font-family: var(--app-font, Arial, sans-serif);
   }
 
@@ -89,7 +89,7 @@
     width: 58px;
     height: 58px;
     border-radius: 0 0 999px 999px;
-    background: #ffffff;
+    background: var(--tm-white);
   }
 
   .process-section__panel::after {
@@ -109,7 +109,7 @@
     left: 20.4%;
     z-index: 2;
     margin: 0;
-    color: #ffffff;
+    color: var(--tm-white);
     font-size: clamp(24px, 2.45vw, 28px);
     font-weight: 800;
     line-height: 1.06;
@@ -128,7 +128,7 @@
     position: absolute;
     width: 33.333%;
     height: 50%;
-    color: #ffffff;
+    color: var(--tm-white);
     background: rgba(10, 72, 178, 0.22);
     border: 1px solid rgba(255, 255, 255, 0.42);
     box-sizing: border-box;
@@ -136,8 +136,8 @@
 
   .process-section__card--light {
     color: #0752bd;
-    background: #ffffff;
-    border-color: #ffffff;
+    background: var(--tm-white);
+    border-color: var(--tm-white);
   }
 
   .process-section__card--1 {
@@ -199,13 +199,13 @@
   .process-section__card--2::before {
     left: -22px;
     top: 44%;
-    background: #ffffff;
+    background: var(--tm-white);
   }
 
   .process-section__card--2::after {
     left: 44%;
     bottom: -22px;
-    background: #ffffff;
+    background: var(--tm-white);
   }
 
   .process-section__card--3::before {
@@ -235,13 +235,13 @@
   .process-section__card--5::before {
     right: -22px;
     top: 44%;
-    background: #ffffff;
+    background: var(--tm-white);
   }
 
   .process-section__card--5::after {
     left: 44%;
     bottom: -22px;
-    background: #ffffff;
+    background: var(--tm-white);
   }
 
   .process-section__card-number {
@@ -253,7 +253,7 @@
     height: 38px;
     border-radius: 50%;
     background: #0752bd;
-    color: #ffffff;
+    color: var(--tm-white);
     font-size: 13px;
     font-weight: 800;
     box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35);
@@ -379,7 +379,7 @@
     padding: 0 17px;
     border: 0;
     border-radius: 7px;
-    background: #ffffff;
+    background: var(--tm-white);
     color: #0752bd;
     font-size: 8px;
     font-weight: 800;

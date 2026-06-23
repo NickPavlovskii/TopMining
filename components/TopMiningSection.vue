@@ -1,132 +1,7 @@
 <template>
   <section class="top-mining">
-    <header
-      :class="[
-        'top-mining__header',
-        { 'top-mining__header--menu-open': isMobileMenuOpen },
-      ]"
-    >
-      <a href="#" class="top-mining__logo" aria-label="Топ Майнинг">
-        <img
-          class="top-mining__logo-mark"
-          :src="logoMark" alt=""
-          />
-        <span class="top-mining__logo-text">
-          <strong class="top-mining__logo-title">топ</strong>
-          <small class="top-mining__logo-subtitle">майнинг</small>
-        </span>
-      </a>
-
-      <button
-        type="button"
-        class="top-mining__menu-toggle"
-        :aria-label="mobileMenuToggleAriaLabel"
-        :aria-expanded="isMobileMenuOpen"
-        @click="isMobileMenuOpen = !isMobileMenuOpen"
-      >
-        <span />
-        <span />
-        <span />
-      </button>
-
-      <h2 class="top-mining__mobile-menu-title">
-        <span class="top-mining__mobile-menu-title-text">
-          <img
-           class="top-mining__mobile-menu-title-logo"
-           :src="logoMark" alt=""
-          />
-          ТОП-МАЙНИНГ
-        </span>
-      </h2>
-
-      <nav class="top-mining__nav" aria-label="Навигация по разделам">
-        <div
-          v-for="(column, columnIndex) in TOP_MINING_NAV_COLUMNS"
-          :key="column.title"
-          :class="[
-            'top-mining__nav-column',
-            { 'top-mining__nav-column--ratings': column.title === 'Рейтинги в майнинге' },
-          ]"
-        >
-          <h3 class="top-mining__nav-heading">
-            <span class="top-mining__nav-heading-text">{{ column.title }}</span>
-            <small class="top-mining__nav-heading-number">
-              ({{ String(columnIndex + 1).padStart(2, '0') }})
-            </small>
-          </h3>
-
-          <a
-            v-for="(item, itemIndex) in column.items"
-            href="#"
-            :key="item"
-            :class="[
-              'top-mining__nav-link',
-              {
-                'top-mining__nav-link--telegram': item === 'Калькулятор в Telegram',
-                'top-mining__nav-link--hidden':
-                  itemIndex >= column.mobileVisible && !isNavColumnExpanded(column.title),
-              },
-            ]"
-          >
-            <img
-              v-if="item === 'Калькулятор в Telegram'"
-              alt=""
-              class="top-mining__nav-telegram-icon"
-              :src="telegramMenuIcon"
-            />
-            <img
-              v-else-if="column.title === 'Рейтинги в майнинге'"
-              alt=""
-              class="top-mining__nav-top-icon"
-              :src="topStarsIcon"
-            />
-            <Icon
-              v-else :name="column.icon"
-              class="top-mining__nav-link-icon"
-            />
-            <span class="top-mining__nav-link-text">{{ item }}</span>
-          </a>
-
-          <button
-            v-if="column.items.length > column.mobileVisible"
-            type="button"
-            class="top-mining__nav-more"
-            @click="toggleNavColumn(column.title)"
-          >
-            <span>
-              {{ navColumnToggleLabels[column.title] }}
-            </span>
-            <Icon
-              name="mdi:chevron-down"
-              :class="[
-                'top-mining__nav-more-icon',
-                { 'top-mining__nav-more-icon--open': isNavColumnExpanded(column.title) },
-              ]"
-            />
-          </button>
-        </div>
-      </nav>
-
-      <div class="top-mining__mobile-menu-footer">
-        <top-mining-button
-          class="top-mining-button--contact"
-          href="#"
-          title="Связаться с нами"
-          v-bind="TOP_MINING_BUTTON_PROPS"
-          :width="TOP_MINING_BUTTON_WIDTH.contact"
-        />
-
-        <a href="#" class="top-mining__mobile-telegram">Telegram</a>
-      </div>
-    </header>
-
     <section class="top-mining__hero">
-      <h1 class="top-mining__title" aria-label="топ-майнинг">
-        <span class="top-mining__title-inner">
-          <img :src="logoMark" alt="" class="top-mining__title-logo" />
-          ТОП-МАЙНИНГ
-        </span>
-      </h1>
+      <top-mining-brand-title variant="hero" />
 
       <div class="top-mining__dark">
         <div class="top-mining__cards">
@@ -343,66 +218,22 @@
     TOP_MINING_BUTTON_PROPS,
     TOP_MINING_BUTTON_WIDTH,
     TOP_MINING_COMPANIES,
-    TOP_MINING_NAV_COLUMNS,
   } from '~/constants/top-mining'
   import blurLeft from '~/assets/images/top-mining/blur-left.png'
   import blurRight from '~/assets/images/top-mining/blur-right.png'
   import buttonArrow from '~/assets/images/top-mining/button-arrow.png'
   import companyStar from '~/assets/images/top-mining/companies/star.png'
-  import logoMark from '~/assets/images/top-mining/logo-mark.png'
   import paperLarge from '~/assets/images/top-mining/paper-large.png'
   import paperSmallNew from '~/assets/images/top-mining/paper-small-new.png'
   import rigLarge from '~/assets/images/top-mining/rig-large.png'
   import rigSmall from '~/assets/images/top-mining/rig-small.png'
   import telegramIcon from '~/assets/images/top-mining/telegram-icon.png'
-  import telegramMenuIcon from '~/assets/images/top-mining/telegram-menu-icon.png'
-  import topStarsIcon from '~/assets/images/top-mining/top-stars-icon.png'
-
-  const expandedNavColumns = ref<string[]>([])
-  const isMobileMenuOpen = ref(false)
-
-  const mobileMenuToggleAriaLabel = computed(() =>
-    isMobileMenuOpen.value ? 'Закрыть меню' : 'Открыть меню',
-  )
-
-  const navColumnToggleLabels = computed(() =>
-    Object.fromEntries(
-      TOP_MINING_NAV_COLUMNS.map((column) => [
-        column.title,
-        expandedNavColumns.value.includes(column.title) ? 'Скрыть' : 'Смотреть еще',
-      ]),
-    ),
-  )
-
-  watch(isMobileMenuOpen, (isOpen) => {
-    if (import.meta.server) {
-      return
-      }
-
-    document.body.classList.toggle('is-mobile-menu-open', isOpen)
-  })
-
-  onBeforeUnmount(() => {
-    if (import.meta.server) return
-
-    document.body.classList.remove('is-mobile-menu-open')
-  })
-
-  function isNavColumnExpanded(title: string) {
-    return expandedNavColumns.value.includes(title)
-  }
-
-  function toggleNavColumn(title: string) {
-    expandedNavColumns.value = isNavColumnExpanded(title)
-      ? expandedNavColumns.value.filter((columnTitle) => columnTitle !== title)
-      : [...expandedNavColumns.value, title]
-  }
 </script>
 
 <style scoped>
   .top-mining {
-    background: #ffffff;
-    color: #111111;
+    background: var(--tm-white);
+    color: var(--tm-text-primary);
     font-family:
       'Segoe UI',
       system-ui,
@@ -424,7 +255,7 @@
     display: inline-flex;
     align-items: center;
     gap: 11px;
-    color: #111111;
+    color: var(--tm-text-primary);
     text-decoration: none;
   }
 
@@ -441,14 +272,14 @@
   }
 
   .top-mining__logo-title {
-    color: #111111;
+    color: var(--tm-text-primary);
     font-size: 36px;
     font-weight: 900;
     letter-spacing: -0.05em;
   }
 
   .top-mining__logo-subtitle {
-    color: #f26a18;
+    color: var(--tm-orange-dark);
     font-size: 14px;
     font-weight: 900;
     letter-spacing: -0.03em;
@@ -472,7 +303,7 @@
 
   .top-mining__nav-heading {
     margin: 0 0 14px;
-    color: #111111;
+    color: var(--tm-text-primary);
     font-size: 15px;
     font-weight: 800;
   }
@@ -486,7 +317,7 @@
     align-items: flex-start;
     gap: 7px;
     margin-bottom: 8px;
-    color: #404040;
+    color: var(--tm-text-muted);
     font-size: 13px;
     font-weight: 500;
     line-height: 1.15;
@@ -499,28 +330,28 @@
     flex: 0 0 auto;
     width: 17px;
     height: 17px;
-    color: #777777;
+    color: var(--tm-text-subtle);
     transition: color 0.18s ease;
   }
 
   @media (hover: hover) {
     .top-mining__nav-link:hover,
     .top-mining__nav-link:focus-visible {
-      color: #ff6a18;
+      color: var(--tm-orange-hover);
     }
 
     .top-mining__nav-link:hover :is(svg, .top-mining__nav-link-icon),
     .top-mining__nav-link:focus-visible :is(svg, .top-mining__nav-link-icon) {
-      color: #ff6a18;
+      color: var(--tm-orange-hover);
     }
   }
 
   .top-mining__nav-link:active {
-    color: #ff6a18;
+    color: var(--tm-orange-hover);
   }
 
   .top-mining__nav-link:active :is(svg, .top-mining__nav-link-icon) {
-    color: #ff6a18;
+    color: var(--tm-orange-hover);
   }
 
   .top-mining__nav-telegram-icon {
@@ -540,11 +371,11 @@
   .top-mining__nav-link--telegram {
     margin-top: 16px;
     padding-top: 16px;
-    border-top: 1px solid #d7d7d7;
+    border-top: 1px solid var(--tm-border-dark);
   }
 
   .top-mining__nav-link--telegram svg {
-    color: #111111;
+    color: var(--tm-text-primary);
   }
 
   .top-mining__nav-more {
@@ -559,8 +390,8 @@
     min-height: 0;
     padding: 0 28px;
     border-radius: 999px;
-    background: linear-gradient(180deg, #ff7b20, #f25b12);
-    color: #ffffff;
+    background: linear-gradient(180deg, var(--tm-orange-gradient-start), var(--tm-orange-dark));
+    color: var(--tm-white);
     font-size: 13px;
     font-weight: 800;
     line-height: 1;
@@ -579,8 +410,8 @@
   .top-mining-button--contact:hover,
   .top-mining-button--contact:focus-visible {
     background: transparent !important;
-    border-color: #ff6a18 !important;
-    color: #151515 !important;
+    border-color: var(--tm-orange-hover) !important;
+    color: var(--tm-black) !important;
   }
 
   .top-mining-button :deep(.q-btn__content),
@@ -601,55 +432,13 @@
     overflow: hidden;
   }
 
-  .top-mining__title {
-    position: relative;
-    z-index: 1;
-    width: 100vw;
-    margin: 12px 0 -16px;
-    margin-left: calc(50% - 50vw);
-    padding: 0;
-    overflow: hidden;
-    color: #151515;
-    font-family: 'Unbounded', 'Segoe UI', system-ui, sans-serif;
-    font-size: clamp(58px, 10.2vw, 200px);
-    font-weight: 600;
-    line-height: 0.82;
-    letter-spacing: -0.03em;
-    text-align: center;
-    text-transform: uppercase;
-  }
-
-  .top-mining__title-inner {
-    --tm-title-logo-left: 1.16em;
-    --tm-title-logo-top: 0.3em;
-
-    position: relative;
-    display: inline-block;
-    max-width: 100%;
-    white-space: nowrap;
-    transform: none;
-    transform-origin: center center;
-  }
-
-  .top-mining__title-logo {
-    position: absolute;
-    left: var(--tm-title-logo-left);
-    top: var(--tm-title-logo-top);
-    width: 0.25em;
-    height: 0.25em;
-    -o-object-fit: contain;
-    object-fit: contain;
-    z-index: 2;
-    pointer-events: none;
-  }
-
   .top-mining__dark {
     position: relative;
     z-index: 2;
     margin: 0 auto;
     padding: 52px 0 76px;
     border-radius: 40px 40px 0 0;
-    background: #151515;
+    background: var(--tm-black);
   }
 
   .top-mining__cards {
@@ -665,7 +454,7 @@
     min-height: 170px;
     border-radius: 22px;
     background: #222222;
-    color: #ffffff;
+    color: var(--tm-white);
     overflow: hidden;
   }
 
@@ -708,7 +497,7 @@
     align-items: center;
     gap: 10px;
     margin: 0 0 28px;
-    color: #ffffff;
+    color: var(--tm-white);
     font-size: 29px;
     font-weight: 800;
     letter-spacing: -0.03em;
@@ -779,8 +568,8 @@
     min-height: 58px;
     padding: 8px 9px;
     border-radius: 8px;
-    background: #ffffff;
-    color: #1f1f1f;
+    background: var(--tm-white);
+    color: var(--tm-shadow);
     font-size: 10px;
     line-height: 1.1;
   }
@@ -826,7 +615,7 @@
     font-size: 13px;
     line-height: 1;
     text-align: center;
-    color: #ffffff !important;
+    color: var(--tm-white) !important;
   }
 
   .top-mining-button svg {
@@ -1023,17 +812,6 @@
       font-size: 11px;
     }
 
-    .top-mining__title {
-      font-size: clamp(58px, 10.4vw, 112px);
-    }
-
-    .top-mining__title-inner {
-      --tm-title-logo-left: 1.14em;
-      --tm-title-logo-top: 0.31em;
-
-      transform: none;
-    }
-
     .top-mining__card-image--rig-large {
       right: 28px;
       top: 70px;
@@ -1085,7 +863,7 @@
       display: block;
       width: 28px;
       height: 2px;
-      background: #151515;
+      background: var(--tm-black);
       transition:
         transform 0.2s ease,
         opacity 0.2s ease;
@@ -1134,7 +912,7 @@
       margin: 0;
       padding: 30px 34px 34px;
       border-radius: 0 0 28px 28px;
-      background: #ffffff;
+      background: var(--tm-white);
       overflow-y: auto;
       scrollbar-width: none;
       overscroll-behavior: contain;
@@ -1166,7 +944,7 @@
       left: 0;
       width: 30px;
       height: 2px;
-      background: #151515;
+      background: var(--tm-black);
     }
 
     .top-mining__header--menu-open .top-mining__menu-toggle span:first-child {
@@ -1214,7 +992,7 @@
       justify-content: space-between;
       gap: 8px;
       margin-bottom: 6px;
-      color: #151515;
+      color: var(--tm-black);
       font-family: 'Unbounded', 'Segoe UI', system-ui, sans-serif;
       font-size: 27px;
       font-weight: 700;
@@ -1230,9 +1008,9 @@
       margin-bottom: 6px;
       margin-left: -34px;
       padding: 8px 34px;
-      background: #ff6a18;
+      background: var(--tm-orange-hover);
       border-bottom: none;
-      color: #ffffff;
+      color: var(--tm-white);
     }
 
     .top-mining__nav-heading-text {
@@ -1257,7 +1035,7 @@
       gap: 7px;
       margin-bottom: 0;
       min-width: 0;
-      color: #303030;
+      color: var(--tm-text-secondary);
       font-size: 14px;
       font-weight: 500;
       line-height: 1.24;
@@ -1275,7 +1053,7 @@
     .top-mining__nav-telegram-icon {
       width: 17px;
       height: 17px;
-      color: #777777;
+      color: var(--tm-text-subtle);
       transition: color 0.18s ease;
     }
 
@@ -1328,7 +1106,7 @@
     .top-mining__header--menu-open .top-mining__mobile-telegram {
       display: block;
       margin: 0;
-      color: #151515;
+      color: var(--tm-black);
       font-size: 16px;
       font-weight: 500;
       line-height: 1;
@@ -1340,21 +1118,21 @@
     @media (hover: hover) {
       .top-mining__header--menu-open .top-mining__nav-link:hover,
       .top-mining__header--menu-open .top-mining__nav-link:focus-visible {
-        color: #ff6a18;
+        color: var(--tm-orange-hover);
       }
 
       .top-mining__header--menu-open .top-mining__nav-link:hover :is(svg, .top-mining__nav-link-icon),
       .top-mining__header--menu-open .top-mining__nav-link:focus-visible :is(svg, .top-mining__nav-link-icon) {
-        color: #ff6a18;
+        color: var(--tm-orange-hover);
       }
     }
 
     .top-mining__header--menu-open .top-mining__nav-link:active {
-      color: #ff6a18;
+      color: var(--tm-orange-hover);
     }
 
     .top-mining__header--menu-open .top-mining__nav-link:active :is(svg, .top-mining__nav-link-icon) {
-      color: #ff6a18;
+      color: var(--tm-orange-hover);
     }
 
     .top-mining__cards {
@@ -1386,17 +1164,6 @@
       bottom: 26px;
     }
 
-    .top-mining__title {
-      margin: 18px 0 -9px;
-      margin-left: calc(50% - 50vw);
-      font-size: clamp(54px, 10.5vw, 108px);
-    }
-
-    .top-mining__title-inner {
-      --tm-title-logo-left: 1.1em;
-      --tm-title-logo-top: 0.3em;
-    }
-
     @keyframes top-mining-menu-in {
       from {
         opacity: 0;
@@ -1425,7 +1192,7 @@
   @media (max-width: 560px) {
     .top-mining {
       --mobile-frame-width: 100%;
-      background: #ffffff;
+      background: var(--tm-white);
     }
 
     .top-mining__header {
@@ -1434,7 +1201,7 @@
       margin: 0 auto;
       padding: 8px 10px;
       border-radius: 0 0 14px 14px;
-      background: #ffffff;
+      background: var(--tm-white);
       transition:
         border-radius 0.24s ease,
         box-shadow 0.24s ease,
@@ -1513,7 +1280,7 @@
       max-height: 40px;
       margin: 42px 0 0;
       padding: 0 2px 10px;
-      color: #151515;
+      color: var(--tm-black);
       font-family: 'Unbounded', 'Segoe UI', system-ui, sans-serif;
       font-size: clamp(26px, 9.6cqw, 31px);
       font-weight: 600;
@@ -1548,9 +1315,9 @@
       margin-top: 0;
       margin-right: -18px;
       margin-left: -18px;
-      border-top: 1px solid #151515;
+      border-top: 1px solid var(--tm-black);
       border-radius: 22px 22px 0 0;
-      background: #ffffff;
+      background: var(--tm-white);
       overflow: hidden;
     }
 
@@ -1614,7 +1381,7 @@
       grid-column: 1 / -1;
       margin-top: 10px;
       padding-top: 10px;
-      border-top: 1px solid #d7d7d7;
+      border-top: 1px solid var(--tm-border-dark);
     }
 
     .top-mining__header--menu-open .top-mining__mobile-menu-footer {
@@ -1640,27 +1407,8 @@
     .top-mining__hero {
       width: var(--mobile-frame-width);
       margin: 0 auto;
-      background: #ffffff;
+      background: var(--tm-white);
       overflow: visible;
-    }
-
-    .top-mining__title {
-      width: 100%;
-      margin: -5px;
-      margin-left: 0;
-      padding-top: 8px;
-      font-size: clamp(28px, 9.2vw, 36px);
-      line-height: 0.9;
-      letter-spacing: 0.05em;
-      overflow: hidden;
-    }
-
-    .top-mining__title-inner {
-      --tm-title-logo-left: 1.17em;
-      --tm-title-logo-top: 0.34em;
-
-      max-width: 100%;
-      transform: none;
     }
 
     .top-mining__dark {
@@ -1730,7 +1478,7 @@
     .top-mining__card-reviews::before {
       content: '★';
       margin-right: 8px;
-      color: #ff6a18;
+      color: var(--tm-orange-hover);
     }
 
     .top-mining__card-companies {

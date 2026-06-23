@@ -1,6 +1,10 @@
 <template>
   <div class="layout">
-    <NuxtPage />
+    <top-mining-header />
+    <main class="layout__content">
+      <NuxtPage />
+    </main>
+    <top-mining-footer />
   </div>
 </template>
 
@@ -10,9 +14,13 @@
     background: var(--bg);
   }
 
+  .layout__content {
+    flex: 1 1 auto;
+  }
+
   @media (max-width: 560px) {
     .layout {
-      background: #ffffff;
+      background: var(--tm-white);
     }
   }
 </style>

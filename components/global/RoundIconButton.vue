@@ -17,6 +17,8 @@
 </template>
 
 <script setup lang="ts">
+  import { TOP_MINING_COLORS } from '~/constants/top-mining'
+
   const props = withDefaults(
     defineProps<{
       icon?: string
@@ -72,7 +74,7 @@
       return props.backgroundColor
     }
 
-    return '#ff6418'
+    return TOP_MINING_COLORS.orange
   })
 
   const resolvedBackground = computed(() => {
@@ -84,7 +86,7 @@
       return 'transparent'
     }
 
-    return '#ff6418'
+    return TOP_MINING_COLORS.orange
   })
 
   const resolvedBorderColor = computed(() => {
@@ -101,10 +103,10 @@
     }
 
     if (props.variant === 'outline') {
-      return '#151515'
+      return TOP_MINING_COLORS.black
     }
 
-    return '#ffffff'
+    return TOP_MINING_COLORS.white
   })
 
   const resolvedHoverBackground = computed(() => {
@@ -133,10 +135,10 @@
     }
 
     if (props.variant === 'outline') {
-      return '#ffffff'
+      return TOP_MINING_COLORS.white
     }
 
-    return '#151515'
+    return TOP_MINING_COLORS.black
   })
 
   const resolvedWidth = computed(() => {
