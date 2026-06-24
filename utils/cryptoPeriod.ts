@@ -2,7 +2,7 @@ import {
   CRYPTO_PRICE_PERIODS,
   DEFAULT_CRYPTO_PRICE_PERIOD,
   type CryptoPricePeriodValue,
-} from '~/constants/crypto'
+} from '~/common/modules/crypto'
 import type { CryptoCoin } from '~/types/crypto-coin'
 
 export function getPeriodLabel(period: CryptoPricePeriodValue) {

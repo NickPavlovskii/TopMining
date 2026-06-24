@@ -3,9 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
+    "clean-stale": "node scripts/clean-stale.mjs",
+    "build": "node scripts/clean-stale.mjs && nuxt build",
+    "dev": "node scripts/clean-stale.mjs && nuxt dev",
+    "generate": "node scripts/clean-stale.mjs && nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },

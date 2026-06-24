@@ -1,0 +1,48 @@
+/* Критичная вёрстка промо-блоков — в глобальном бандле, без ожидания Vue */
+.calculator-promo__epic-blocks {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1720px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(16px, 2vw, 32px);
+  padding-right: clamp(16px, 2vw, 32px);
+}
+
+.epic-blocks {
+  display: grid;
+  gap: clamp(40px, 5vw, 80px);
+  width: 100%;
+}
+
+.epic-block__telegram-surface {
+  border-radius: clamp(32px, 4vw, 64px);
+  background: #1f1f1f;
+}
+
+.epic-block__converter-wrap {
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: clamp(32px, 4vw, 64px);
+  background-color: #1f1f1f;
+}
+
+@media (min-width: 901px) {
+  .calculator-promo__epic-blocks {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+}
+
+@media (max-width: 900px) {
+  .calculator-promo__epic-blocks {
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .epic-block__telegram-surface,
+  .epic-block__converter-wrap {
+    border-radius: clamp(24px, 6vw, 32px);
+  }
+}

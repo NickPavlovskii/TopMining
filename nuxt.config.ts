@@ -3,11 +3,26 @@ export default defineNuxtConfig({
 
   devtools: { enabled: true },
 
+  // Nuxt сканирует dir.modules как локальные Nuxt-модули.
+  // Данные фич лежат в common/modules/, не здесь.
+  dir: {
+    modules: 'nuxt-local-modules',
+  },
+
+  components: {
+    dirs: [
+      {
+        path: '~/components',
+        pathPrefix: false,
+        ignore: ['**/index.ts'],
+      },
+    ],
+  },
+
   css: [
-    './assets/style/variables.scss',
-    './assets/style/scrollbar.scss',
-    './assets/style/main.css',
-    './assets/style/tailwind.css',
+    './assets/scss/variables.scss',
+    './assets/scss/scrollbar.scss',
+    './assets/scss/main.css',
   ],
 
   modules: ['nuxt-quasar-ui', '@nuxt/ui', '@nuxt/icon'],

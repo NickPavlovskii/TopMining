@@ -319,8 +319,8 @@
     getMobileNavItemColumns,
     getVisiblePhoneMenuItems,
     hasPhoneMenuMoreItems,
-  } from '~/constants/top-mining'
-  import type { TopMiningNavColumn } from '~/constants/top-mining/nav-columns'
+  } from '~/common/modules/top-mining'
+  import type { TopMiningNavColumn } from '~/common/modules/top-mining/nav-columns'
   import logoMark from '~/assets/images/top-mining/logo-mark.png'
   import telegramMenuIcon from '~/assets/images/top-mining/telegram-menu-icon.png'
   import topStarsIcon from '~/assets/images/top-mining/top-stars-icon.png'

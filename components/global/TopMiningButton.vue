@@ -47,7 +47,7 @@
     TopMiningButtonSize,
     TopMiningButtonSurface,
     TopMiningButtonVariant,
-  } from '~/constants/top-mining/button'
+  } from '~/common/modules/top-mining/button'
 
   const props = withDefaults(
     defineProps<{

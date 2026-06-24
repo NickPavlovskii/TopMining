@@ -52,7 +52,7 @@
 </template>
 
 <script setup lang="ts">
-  import { PROCESS_SECTION_STEPS } from '~/constants/process-section'
+  import { PROCESS_SECTION_STEPS } from '~/common/modules/process'
 
   const emit = defineEmits<{
     cta: []

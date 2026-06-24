@@ -51,16 +51,19 @@
           />
         </div>
       </div>
-      <top-mining-epic-blocks class="calculator-promo__epic-blocks" />
+      <div class="calculator-promo__epic-blocks">
+        <TopMiningEpicBlocks />
+      </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
+  import TopMiningEpicBlocks from '~/components/top-mining/TopMiningEpicBlocks.vue'
   import {
     MINING_CALCULATOR_PROMO_STATS,
     MINING_CALCULATOR_PROMO_VIDEO,
-  } from '~/constants/top-mining'
+  } from '~/common/modules/top-mining'
   import calculatorRigImage from '~/assets/images/top-mining/calculator-rig.png'
 </script>
 
