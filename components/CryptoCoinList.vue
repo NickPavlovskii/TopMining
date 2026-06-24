@@ -147,8 +147,16 @@
 </script>
 
 <style scoped>
+  .crypto-list {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+  }
+
   .crypto-list__title {
     margin: 0 0 18px;
+    min-height: calc(2 * 1.1em);
     color: var(--tm-white);
     font-size: 30px;
     font-weight: 800;
@@ -157,6 +165,7 @@
   }
 
   .crypto-list__card {
+    flex: 1;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 24px;
     background:
@@ -376,7 +385,10 @@
 
   @media (max-width: 820px) {
     .crypto-list__title {
+      margin-bottom: 12px;
+      min-height: calc(2 * 1.1em);
       color: var(--tm-black);
+      font-size: 22px;
     }
 
     .crypto-list__card {

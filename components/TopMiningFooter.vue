@@ -170,9 +170,9 @@
     margin: 144px 0 56px;
     color: var(--tm-off-white);
     font-family: 'Unbounded', 'Segoe UI', system-ui, sans-serif;
-    font-size: 120px;
+    font-size: clamp(34px, 7.2vw, 120px);
     font-weight: 500;
-    line-height: 120px;
+    line-height: 1.08;
     text-transform: uppercase;
   }
 
@@ -335,8 +335,14 @@
 
   @media (max-width: 1919px) {
     .site-footer__contact-heading {
-      font-size: 96px;
-      line-height: 103.68px;
+      font-size: clamp(34px, 7.2vw, 96px);
+    }
+  }
+
+  @media (max-width: 1100px) and (min-width: 901px) {
+    .site-footer__contact-heading {
+      font-size: clamp(48px, 6.8vw, 72px);
+      line-height: 1.06;
     }
   }
 
@@ -536,6 +542,8 @@
     .site-footer__contact-heading {
       margin-top: 96px;
       margin-bottom: 40px;
+      font-size: clamp(40px, 8.5vw, 64px);
+      line-height: 1.06;
     }
 
     .site-footer__contact-form {

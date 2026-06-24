@@ -1,5 +1,3 @@
-import { TOP_MINING_COLORS, TOP_MINING_ORANGE_GRADIENT } from './colors'
-
 export type TopMiningButtonVariant = 'primary' | 'secondary' | 'tertiary'
 
 export type TopMiningButtonSize = 'big' | 'small'
@@ -7,12 +5,12 @@ export type TopMiningButtonSize = 'big' | 'small'
 export type TopMiningButtonSurface = 'light' | 'dark'
 
 export const TOP_MINING_BUTTON_COLORS = {
-  orange: TOP_MINING_COLORS.orange,
-  orangeDark: TOP_MINING_COLORS.orangeDark,
-  white: TOP_MINING_COLORS.white,
-  text: TOP_MINING_COLORS.textSecondary,
-  textDark: TOP_MINING_COLORS.black,
-  icon: TOP_MINING_COLORS.icon,
+  orange: 'var(--orange-color)',
+  orangeDark: 'var(--orange-dark-color)',
+  white: 'var(--white-color)',
+  text: 'var(--text-secondary-color)',
+  textDark: 'var(--jet-color)',
+  icon: 'var(--icon-color)',
 } as const
 
 export const TOP_MINING_BUTTON_WIDTH = {
@@ -22,7 +20,7 @@ export const TOP_MINING_BUTTON_WIDTH = {
   telegram: '220px',
 } as const
 
-export const TOP_MINING_BUTTON_BG = TOP_MINING_ORANGE_GRADIENT
+export const TOP_MINING_BUTTON_BG = 'var(--orange-gradient)'
 
 export const TOP_MINING_BUTTON_PROPS = {
   bgColor: TOP_MINING_BUTTON_BG,

@@ -297,8 +297,8 @@
           variant="primary"
           size="big"
           surface="dark"
-          :bg-color="TOP_MINING_COLORS.orange"
-          :color="TOP_MINING_COLORS.white"
+          bg-color="var(--orange-color)"
+          color="var(--white-color)"
         >
           <span class="top-mining-button__consulting-label">
             Consulting- услуги
@@ -312,7 +312,6 @@
 
 <script setup lang="ts">
   import {
-    TOP_MINING_COLORS,
     TOP_MINING_MOBILE_MENU_PHONE,
     TOP_MINING_MOBILE_MENU_SOCIALS,
     TOP_MINING_NAV_COLUMNS,
@@ -1830,10 +1829,10 @@
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      background: linear-gradient(180deg, #ff741f 0%, #ec5100 100%);
+      background: var(--orange-accent-gradient-vertical);
       color: var(--tm-white);
       text-decoration: none;
-      box-shadow: 0 4px 14px rgba(236, 81, 0, 0.24);
+      box-shadow: 0 4px 14px color-mix(in srgb, var(--orange-accent-deep-color) 24%, transparent);
     }
 
     .top-mining__mobile-contact-btn :deep(svg) {
