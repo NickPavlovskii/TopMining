@@ -125,7 +125,7 @@
     TOP_MINING_HASHRATE_CONVERTER_URL,
     TOP_MINING_TELEGRAM_BOT_URL,
     TOP_MINING_TELEGRAM_CALC_VIDEO,
-  } from '~/constants/top-mining'
+  } from '~/common/modules/top-mining'
   import tgCalcMockupBg from '~/assets/images/top-mining/tg-calc-mockup-bg.png'
   import tgPlaneDecor from '~/assets/images/top-mining/tg-plane-decor.svg'
   import tgPlaneSmall from '~/assets/images/top-mining/tg-plane-small.png'
@@ -192,7 +192,6 @@
   .epic-blocks {
     display: grid;
     gap: clamp(40px, 5vw, 80px);
-    max-width: none;
     width: 100%;
     margin: 0;
     padding: 0;
@@ -366,7 +365,6 @@
   .epic-block--converter {
     display: block;
     width: 100%;
-    max-width: 1720px;
     margin: 0 auto clamp(48px, 6.5vw, 110px);
   }
 

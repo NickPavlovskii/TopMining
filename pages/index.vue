@@ -1,14 +1,17 @@
 <template>
   <main class="page">
-    <!-- <work-process-section @cta="onLeaveRequest" /> -->
-    <top-mining-section />
-    <crypto-market-section />
-    
-    <mining-calculator-promo />
+    <!-- <WorkProcessSection @cta="onLeaveRequest" /> -->
+    <TopMiningSection />
+    <CryptoMarketSection />
+    <MiningCalculatorPromo />
   </main>
 </template>
 
 <script setup lang="ts">
+  import CryptoMarketSection from '~/components/crypto/CryptoMarketSection.vue'
+  import MiningCalculatorPromo from '~/components/top-mining/MiningCalculatorPromo.vue'
+  import TopMiningSection from '~/components/top-mining/TopMiningSection.vue'
+
   useHead({ title: 'Niklad' })
 
   function onLeaveRequest() {

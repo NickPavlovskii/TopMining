@@ -92,7 +92,7 @@
     GROWTH_COIN_IDS,
     POPULAR_COIN_IDS,
     VOLUME_COIN_IDS,
-  } from '~/constants/crypto'
+  } from '~/common/modules/crypto'
   import type { CryptoCoin, CryptoResponse } from '~/types/crypto-coin'
   import { bitcoinIcon } from '~/utils/cryptoIcons'
   import { getChangeToneClass } from '~/utils/cryptoPeriod'

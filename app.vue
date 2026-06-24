@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import Default from './layouts/default.vue'
+  import TheDefault from './layouts/TheDefault.vue'
 
   useHead({
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/small-logo.ico' }],
@@ -8,6 +8,6 @@
 
 <template>
   <UApp>
-    <default />
+    <TheDefault />
   </UApp>
 </template>

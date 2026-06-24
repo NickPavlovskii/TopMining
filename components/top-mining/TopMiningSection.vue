@@ -218,7 +218,7 @@
     TOP_MINING_BUTTON_PROPS,
     TOP_MINING_BUTTON_WIDTH,
     TOP_MINING_COMPANIES,
-  } from '~/constants/top-mining'
+  } from '~/common/modules/top-mining'
   import blurLeft from '~/assets/images/top-mining/blur-left.png'
   import blurRight from '~/assets/images/top-mining/blur-right.png'
   import buttonArrow from '~/assets/images/top-mining/button-arrow.png'

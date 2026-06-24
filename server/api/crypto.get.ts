@@ -2,7 +2,7 @@ import {
   CRYPTO_COIN_IDS,
   FALLBACK_BITCOIN_USD,
   FALLBACK_COINS,
-} from '~/constants/crypto'
+} from '~/common/modules/crypto'
 import type { BitcoinUsd, CryptoCoin } from '~/types/crypto-coin'
 
 interface CoinGeckoMarketCoin {

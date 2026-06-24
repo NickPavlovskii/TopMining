@@ -1,4 +1,5 @@
 @import '@fontsource/unbounded/500.css';@import '@fontsource/unbounded/600.css';
 @import './global.css';
+@import './epic-blocks-critical.css';
 @import '@nuxt/ui';
 @import 'tailwindcss';
