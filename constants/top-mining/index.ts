@@ -1,6 +1,6 @@
 export * from './button'
 export * from './calculator-promo'
-export * from './colors'
 export * from './companies'
+export * from './epic-blocks'
 export * from './mobile-menu'
 export * from './nav-columns'

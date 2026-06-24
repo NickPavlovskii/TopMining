@@ -3,7 +3,12 @@ export default defineNuxtConfig({
 
   devtools: { enabled: true },
 
-  css: ['./assets/style/main.css', './assets/style/tailwind.css'],
+  css: [
+    './assets/style/variables.scss',
+    './assets/style/scrollbar.scss',
+    './assets/style/main.css',
+    './assets/style/tailwind.css',
+  ],
 
   modules: ['nuxt-quasar-ui', '@nuxt/ui', '@nuxt/icon'],
 

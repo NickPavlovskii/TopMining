@@ -233,11 +233,19 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 40px 32px;
-    align-items: start;
+    align-items: stretch;
+  }
+
+  .crypto-section__chart-block {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
   }
 
   .crypto-section__chart-block-title {
     margin: 0 0 18px;
+    min-height: calc(2 * 1.1em);
     color: var(--tm-white);
     font-size: 30px;
     font-weight: 800;
@@ -246,6 +254,7 @@
   }
 
   .crypto-section__chart {
+    flex: 1;
     position: relative;
     min-height: 300px;
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -365,6 +374,7 @@
     .crypto-section__chart-block-title {
       color: var(--tm-black);
       font-size: 22px;
+      min-height: calc(2 * 1.1em);
       margin-bottom: 12px;
     }
 

@@ -1,0 +1,114 @@
+:root {
+  // Шрифт
+  --font-family-base: 'Roboto', sans-serif;
+  --font-size-base: 14px;
+
+  // Базовые
+  --bg: #f8fafc;
+  --text: #1e293b;
+  --white-color: #ffffff;
+  --black-color: #05060f;
+
+  // UI (legacy)
+  --color-primary: #6366f1;
+  --color-secondary: #22c55e;
+  --color-accent: #f59e0b;
+  --light-platinum: #e2e8f0;
+  --gray: #334155;
+  --light-gray: #64748b;
+  --extra-light-gray: #f1f5f9;
+
+  // Оранжевые
+  --orange-color: #ff6418;
+  --orange-hover-color: #ff6a18;
+  --orange-dark-color: #f25b12;
+  --orange-gradient-start-color: #ff7b20;
+  --orange-accent-light-color: #ff741f;
+  --orange-accent-deep-color: #ec5100;
+  --orange-accent-gradient-vertical: linear-gradient(
+    180deg,
+    var(--orange-accent-light-color) 0%,
+    var(--orange-accent-deep-color) 100%
+  );
+  --orange-accent-gradient-horizontal: linear-gradient(
+    90deg,
+    var(--orange-accent-deep-color) 0%,
+    var(--orange-accent-light-color) 100%
+  );
+  --orange-gradient: linear-gradient(
+    180deg,
+    var(--orange-gradient-start-color),
+    var(--orange-dark-color)
+  );
+
+  // Серые цвета
+  --jet-color: #151515;
+  --shadow-color: #1f1f1f;
+  --icon-color: #c8c8c8;
+  --off-white-color: #f6f6f6;
+  --surface-light-color: #ececec;
+  --surface-gray-color: #f4f4f4;
+  --border-color: #d8d8d8;
+  --border-light-color: #cfcfcf;
+  --border-dark-color: #d7d7d7;
+
+  // Текст
+  --text-primary-color: #111111;
+  --text-secondary-color: #303030;
+  --text-muted-color: #404040;
+  --text-subtle-color: #777777;
+  --text-gray-color: #666666;
+  --text-placeholder-color: #8c8c8c;
+
+  // Тёмные поверхности
+  --dark-bg-color: #1e1e1e;
+  --card-bg-color: #2a2a2a;
+
+  // Скроллбар
+  --scroll-width: 8px;
+  --scroll-track-color: var(--white-color);
+  --scroll-thumb-color: var(--orange-color);
+  --scroll-thumb-hover-color: var(--orange-dark-color);
+
+  // Top Mining aliases
+  --tm-orange: var(--orange-color);
+  --tm-orange-hover: var(--orange-hover-color);
+  --tm-orange-dark: var(--orange-dark-color);
+  --tm-orange-gradient-start: var(--orange-gradient-start-color);
+  --tm-orange-accent-light: var(--orange-accent-light-color);
+  --tm-orange-accent-deep: var(--orange-accent-deep-color);
+  --tm-orange-accent-gradient-vertical: var(--orange-accent-gradient-vertical);
+  --tm-orange-accent-gradient-horizontal: var(--orange-accent-gradient-horizontal);
+
+  --tm-black: var(--jet-color);
+  --tm-text-primary: var(--text-primary-color);
+  --tm-text-secondary: var(--text-secondary-color);
+  --tm-text-muted: var(--text-muted-color);
+  --tm-text-subtle: var(--text-subtle-color);
+  --tm-text-gray: var(--text-gray-color);
+  --tm-text-placeholder: var(--text-placeholder-color);
+
+  --tm-white: var(--white-color);
+  --tm-off-white: var(--off-white-color);
+  --tm-surface-light: var(--surface-light-color);
+  --tm-surface-gray: var(--surface-gray-color);
+
+  --tm-border: var(--border-color);
+  --tm-border-light: var(--border-light-color);
+  --tm-border-dark: var(--border-dark-color);
+
+  --tm-icon: var(--icon-color);
+  --tm-shadow: var(--shadow-color);
+  --tm-dark-bg: var(--dark-bg-color);
+  --tm-card-bg: var(--card-bg-color);
+
+  --tm-scroll-width: var(--scroll-width);
+  --tm-scroll-track: var(--scroll-track-color);
+  --tm-scroll-thumb: var(--scroll-thumb-color);
+  --tm-scroll-thumb-hover: var(--scroll-thumb-hover-color);
+}
+
+.dark {
+  --bg: #0f172a;
+  --text: #f1f5f9;
+}

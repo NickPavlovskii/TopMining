@@ -51,6 +51,7 @@
           />
         </div>
       </div>
+      <top-mining-epic-blocks class="calculator-promo__epic-blocks" />
     </div>
   </section>
 </template>
@@ -72,7 +73,7 @@
     width: 100%;
     background: var(--tm-white);
     border-radius: 60px 60px 0 0;
-    overflow: hidden;
+    overflow: visible;
   }
 
   .calculator-promo__inner {
@@ -82,9 +83,21 @@
     gap: 24px;
     align-items: center;
     min-height: 480px;
-    max-width: 1440px;
+    max-width: 1720px;
     margin: 0 auto;
-    padding: 64px clamp(24px, 5vw, 80px) 56px;
+    padding: 64px clamp(16px, 2vw, 32px) 32px;
+    overflow: hidden;
+  }
+
+  .calculator-promo__epic-blocks {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1720px;
+    margin: clamp(32px, 4vw, 56px) auto 0;
+    padding: 0 clamp(16px, 2vw, 32px);
+    overflow: visible;
+    box-sizing: border-box;
   }
 
   .calculator-promo__content {
@@ -112,7 +125,6 @@
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
-    gap: 0.18em;
   }
 
   .calculator-promo__title-line--product .calculator-promo__title-part {
@@ -189,13 +201,13 @@
 
   .calculator-promo__visual {
     position: absolute;
-    right: clamp(16px, 3vw, 48px);
+    right: 0;
     bottom: 0;
     z-index: 1;
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
-    width: min(100%, 560px);
+    width: min(100%, 827px);
     height: calc(100% - 24px);
     pointer-events: none;
   }
@@ -319,6 +331,17 @@
     }
   }
 
+  @media (min-width: 901px) {
+    .calculator-promo__epic-blocks {
+      margin-top: clamp(64px, 6vw, 96px);
+      padding-inline: 60px;
+    }
+
+    .calculator-promo__inner {
+      padding-inline: 60px;
+    }
+  }
+
   @media (max-width: 720px) and (min-width: 561px) {
     .calculator-promo__inner {
       grid-template-columns: 1fr;
@@ -330,6 +353,15 @@
 
     .calculator-promo__video {
       max-height: min(72vw, 300px);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .calculator-promo__epic-blocks {
+      width: 100%;
+      max-width: none;
+      padding: clamp(24px, 5vw, 32px) 0 clamp(16px, 4vw, 24px);
+      background: var(--tm-white);
     }
   }
 
@@ -351,45 +383,49 @@
     }
 
     .calculator-promo__content {
-      text-align: center;
+      text-align: left;
     }
 
     .calculator-promo__title {
       margin-bottom: 20px;
-      font-size: clamp(18px, 5.6vw, 28px);
-      line-height: 1.06;
-      letter-spacing: -0.04em;
-      text-align: center;
+      font-size: clamp(34px, 10vw, 48px);
+      font-weight: 600;
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      text-align: left;
     }
 
     .calculator-promo__title-line--head {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: baseline;
-      gap: 0.18em;
-      margin-bottom: 0.06em;
-      font-size: 0.26em;
+      gap: 0.32em;
+      margin-bottom: 0.35em;
+      font-size: clamp(15px, 4.2vw, 24px);
+      font-weight: 500;
+      line-height: 1.17;
+      letter-spacing: 0;
       white-space: normal;
-    }
-
-    .calculator-promo__title-line--product {
-      white-space: normal;
-      text-align: center;
     }
 
     .calculator-promo__title-line--product .calculator-promo__title-part {
       display: block;
-      text-align: center;
+      text-align: left;
+      font-size: 1em;
+      font-weight: 600;
+      line-height: 0.98;
     }
 
-    .calculator-promo__title-word,
+    .calculator-promo__title-line--head .calculator-promo__title-word,
     .calculator-promo__title-line--head .calculator-promo__highlight-text {
-      color: var(--tm-orange-hover);
+      background: var(--orange-accent-gradient-horizontal);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
       text-shadow: none;
     }
 
-    .calculator-promo__title-line:not(.calculator-promo__title-line--head),
     .calculator-promo__title-line--product .calculator-promo__title-part {
       color: var(--tm-white);
     }
@@ -419,6 +455,12 @@
       object-fit: contain;
       object-position: center bottom;
     }
+
+    .calculator-promo__epic-blocks {
+      margin-top: 0;
+      padding: 16px 0 24px;
+      background: var(--tm-white);
+    }
   }
 
   @media (max-width: 360px) {
@@ -428,8 +470,12 @@
     }
 
     .calculator-promo__title {
-      font-size: clamp(16px, 5.2vw, 22px);
-      letter-spacing: -0.045em;
+      font-size: clamp(30px, 9.2vw, 42px);
+      letter-spacing: -0.05em;
+    }
+
+    .calculator-promo__title-line--head {
+      font-size: clamp(14px, 3.9vw, 22px);
     }
   }
 </style>
