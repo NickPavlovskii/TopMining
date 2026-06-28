@@ -1,3 +1,4 @@
+export * from './contact-section'
 export * from './button'
 export * from './calculator-promo'
 export * from './companies'

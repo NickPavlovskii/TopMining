@@ -1,5 +1,9 @@
 <template>
-  <section class="rating-section" aria-labelledby="rating-section-title">
+  <section
+    class="rating-section"
+    :style="{ '--rating-surface': TOP_MINING_RATING_SURFACE }"
+    aria-labelledby="rating-section-title"
+  >
     <div class="rating-section__inner">
       <header class="rating-section__hero">
         <h2 id="rating-section-title" class="rating-section__title-sr">
@@ -53,6 +57,7 @@
 <script setup lang="ts">
   import {
     TOP_MINING_RATING_CARDS,
+    TOP_MINING_RATING_SURFACE,
     TOP_MINING_RATING_VIDEO,
   } from '~/constants/top-mining/ratings'
 </script>
@@ -83,7 +88,7 @@
     display: flex;
     justify-content: center;
     margin: 0 0 clamp(40px, 5vw, 72px);
-    background: var(--rating-surface);
+    background: transparent;
     overflow: hidden;
   }
 
@@ -102,10 +107,9 @@
   .rating-section__hero-video {
     display: block;
     width: 100%;
-    max-width: min(100%, 1100px);
+    max-width: 100%;
     height: auto;
-    vertical-align: middle;
-    background: var(--rating-surface);
+    background: transparent;
     pointer-events: none;
     user-select: none;
   }

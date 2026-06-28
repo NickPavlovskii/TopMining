@@ -58,4 +58,9 @@ export default defineNuxtConfig({
       fontIcons: ['material-icons'],
     },
   },
+
+  runtimeConfig: {
+    catalogGraphqlUrl:
+      process.env.CATALOG_GRAPHQL_URL || 'http://localhost:8080/graphql',
+  },
 })
